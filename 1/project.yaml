@@ -1,0 +1,25 @@
+# Based on https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/
+
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: test1
+  namespace: argocd
+  labels:
+    app: test1
+  # Finalizer that ensures that project is not deleted until it is not referenced by any application
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  # Project description
+  description: Here should be the project description
+  # Allow manifests to deploy only from argoproj user and the repo argocd-example-apps
+  sourceRepos:
+  - "https://github.com/argoproj/argocd-example-apps.git"
+  # Only permit to deploy applications in the cluster where argocd is running and namespace test1
+  destinations:
+  - namespace: test1
+    server: https://kubernetes.default.svc
+  # Enables namespace orphaned resource monitoring.
+  orphanedResources:
+    warn: false

@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test1
+  namespace: argocd
+  labels:
+    app: test1
+spec:
+  # Set the destination of the app
+  destination:
+    namespace: test1
+    server: 'https://kubernetes.default.svc'
+  # Set the source of the app 
+  source:
+    path: guestbook
+    repoURL: 'https://github.com/argoproj/argocd-example-apps.git'
+    targetRevision: HEAD
+  project: test1
+  syncPolicy:
+    # Set automatic sync policies
+    automated:
+      prune: true
+      selfHeal: true
