@@ -12,7 +12,7 @@ spec:
   # Helm chart from directory
   source:
     repoURL: 'https://github.com/matandomuertos/argotest.git'
-    path: 3/chart
+    path: 3/good/chart
     targetRevision: HEAD
   project: test3
   syncPolicy:

@@ -13,6 +13,7 @@ spec:
   description: Test3
   sourceRepos:
   - "https://charts.bitnami.com/bitnami"
+  - "https://github.com/matandomuertos/argotest.git"
   destinations:
   - namespace: test3
     server: https://kubernetes.default.svc
