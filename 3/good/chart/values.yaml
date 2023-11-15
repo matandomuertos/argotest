@@ -1,0 +1,3 @@
+nginx-umbrella:
+  service:
+    type: ClusterIP
