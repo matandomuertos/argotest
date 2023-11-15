@@ -1,3 +1,10 @@
+apiVersion: v2
+name: nginx-umbrella
+description: nginx umbrella chart - test3 - the good
+type: application
+version: 0.1.0
+appVersion: "15.4.2"
+
 dependencies:
 - name: nginx
   version: 15.4.2
