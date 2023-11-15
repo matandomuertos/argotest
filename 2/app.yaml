@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test2
+  namespace: argocd
+  labels:
+    app: test2
+spec:
+  destination:
+    namespace: test2
+    server: 'https://kubernetes.default.svc'
+  source:
+    # Chart name
+    chart: nginx
+    # Chart source
+    repoURL: 'https://charts.bitnami.com/bitnami'
+    # Chart version
+    targetRevision: 15.4.2
+  project: test2
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

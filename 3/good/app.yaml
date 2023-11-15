@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test3-good
+  namespace: argocd
+  labels:
+    app: test3-good
+spec:
+  destination:
+    namespace: test3
+    server: 'https://kubernetes.default.svc'
+  # Helm chart from directory
+  source:
+    repoURL: 'https://github.com/matandomuertos/argotest.git'
+    path: 3/chart
+    targetRevision: HEAD
+  project: test3
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

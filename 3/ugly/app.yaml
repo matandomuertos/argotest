@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test3-ugly
+  namespace: argocd
+  labels:
+    app: test3-ugly
+spec:
+  destination:
+    namespace: test3
+    server: 'https://kubernetes.default.svc'
+  source:
+    chart: nginx
+    repoURL: 'https://charts.bitnami.com/bitnami'
+    targetRevision: 15.4.2
+    # Add parameter to replace in default values.yaml
+    helm:
+      parameters:
+        - name: "service.type"
+          value: "ClusterIP"
+  project: test3
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

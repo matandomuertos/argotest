@@ -1,0 +1,21 @@
+# Based on https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/
+
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: test2
+  namespace: argocd
+  labels:
+    app: test2
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Test2 (nginx web server)
+  sourceRepos:
+  # Allow all Bitnami charts
+  - "https://charts.bitnami.com/bitnami"
+  destinations:
+  - namespace: test2
+    server: https://kubernetes.default.svc
+  orphanedResources:
+    warn: false
