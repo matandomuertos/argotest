@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test4
+  namespace: argocd
+  labels:
+    app: test4
+spec:
+  destination:
+    namespace: test4
+    server: 'https://kubernetes.default.svc'
+  sources:
+  # nginx helm umbrella
+  - repoURL: 'https://github.com/matandomuertos/argotest.git'
+    path: 3/good/chart
+    targetRevision: HEAD
+  # guestbook from template
+  - repoURL: 'https://github.com/argoproj/argocd-example-apps.git'
+    path: guestbook
+    targetRevision: HEAD
+  project: test4
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

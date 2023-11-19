@@ -1,0 +1,22 @@
+# Based on https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/
+
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: test4
+  namespace: argocd
+  labels:
+    app: test4
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Test4 (multiple apps)
+  sourceRepos:
+  # Allow guesbook and nginx umbrella repos
+  - "https://github.com/argoproj/argocd-example-apps.git"
+  - "https://github.com/matandomuertos/argotest.git"
+  destinations:
+  - namespace: test4
+    server: https://kubernetes.default.svc
+  orphanedResources:
+    warn: false
